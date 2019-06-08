@@ -1,0 +1,33 @@
+<h1>Todo</h1>
+
+<div class="container">
+
+  <!-- todoForm.dirty check if the form has been edited already so that the error messagee won't show up upon load -->
+  <div class="alert alert-warning" *ngIf="todoForm.dirty && todoForm.invalid">Enter valid values</div>
+  <div class="alert alert-warning" *ngIf="targetDate.dirty && targetDate.invalid">Invalid Target Date</div>
+  <div class="alert alert-warning" *ngIf="description.dirty && description.invalid">Invalid Description minimum length is 4</div>
+
+  <!-- (#todoForm="ngForm") means that this form is beeing assigneed to the template variable #todoForm -->
+  <!-- ((ngSubmit="!todoForm.invalid && saveTodo()") means that the form would only be submitted/executed if all the validations on each form element is met ex. required=required or minlength="6") -->
+  <form (ngSubmit)="!todoForm.invalid && saveTodo()" #todoForm="ngForm">
+    <fieldset class="form-group">
+      <label>Description</label>
+      <input type="text" #description="ngModel" [(ngModel)]="todo.description" 
+          class="form-control" name="description" required="required" minlength="4">
+    </fieldset>
+
+    <fieldset class="form-group">
+      <label>Target Date</label>
+      <!-- you can split the ngModel into its 2 parts (property binding and event binding) -->
+      <!-- then you can use a pipe to format the date into a specific format after you split the ngModel -->
+      <input type="date" #targetDate="ngModel"
+        [ngModel]="todo.targetDate | date:'yyyy-MM-dd' " (ngModelChange)="todo.targetDate = $event"
+        class="form-control" name="targetDate" required="required">
+    </fieldset>
+
+    <button type="submit" class="btn btn-success">Save</button>
+    <!-- this kind of button is used if you want to make your component formless -->
+    <!-- <button (click)="saveTodo()" class="btn btn-success">Save</button> -->
+  </form>
+
+</div>

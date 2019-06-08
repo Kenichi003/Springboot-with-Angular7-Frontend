@@ -1,0 +1,17 @@
+<h1>Welcome!</h1>
+<div class="container">
+  Welcome {{name}}. manage your to do's <a routerLink="/todos">here</a>
+</div>
+
+<div class="container">
+  Custom Message
+  <button (click)="getWelcomeMessageWithParameter()" class="btn btn-success">Get Welcome Message</button>
+  
+</div>
+
+<!-- the *ngIf is used so that it only shows this div when the welcomeMessageFromService has a value -->
+<div class="container" *ngIf="welcomeMessageFromService">
+  <h2>Your Customized Welcome Message</h2>
+  {{welcomeMessageFromService}}
+  
+</div>

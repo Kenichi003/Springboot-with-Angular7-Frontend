@@ -1,0 +1,35 @@
+<h1>My Todo's</h1>
+
+<div class="container">
+    <div class="alert alert-success" *ngIf="message">{{message}}</div>
+  <table class="table">
+    <!-- <caption>My To Do's</caption> -->
+    <thead>
+      <!-- <th>id</th> -->
+      <th>Description</th>
+      <th>Target Date</th>
+      <th>Is Completed?</th>
+      <th>Update</th>
+      <th>Delete</th>
+    </thead>
+    <tbody>
+      <!-- for (Todo todo: todos) { -->
+      <tr *ngFor="let todo of todos">
+        <!-- <td>{{todo.id}}</td> -->
+        <td>{{todo.description}}</td>
+        <!-- the pipe is used to format field values -->
+        <td>{{todo.targetDate | date}}</td>
+        <td>{{todo.done}}</td>
+        <td><button (click)="updateTodo(todo.id)" class="btn btn-success">Update</button></td>
+        <!-- the todo is already defined on the ngFor so you can use the specific row's todo.id for delete -->
+        <td><button (click)="deleteTodo(todo.id)" class="btn btn-warning">Delete</button></td>
+      </tr>
+
+    </tbody>
+
+    <div class="row">
+      <button (click)="addTodo()" class="btn btn-success">Add Todo</button>
+    </div>
+
+  </table>
+</div>
